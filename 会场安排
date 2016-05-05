@@ -1,0 +1,53 @@
+ 
+#define SIZE 10005  
+  
+struct Activity_Info  
+{  
+    int s;  //开始时间  
+    int e;  //结束时间  
+}acts[SIZE];  
+  
+bool Cmp(const Activity_Info a, const Activity_Info b)  
+{  
+    return a.e < b.e;  
+}  
+  
+int ArrangingActivities(int n)  
+{  
+    //按结束时间从小到大排序  
+    sort(acts, acts+n, Cmp);  
+  
+    int count = 0;  
+    int currTime = -1;  //当前时间  
+    int i;  
+    for (i = 0; i < n; i++)  
+    {  
+        if (acts[i].s > currTime)  
+        {  
+            count++;  
+            currTime = acts[i].e;  
+        }  
+    }  
+    return count;  
+}  
+  
+int main(void)  
+{  
+    int ncases;  
+    scanf("%d", &ncases);  
+    while (ncases-- != 0)  
+    {  
+        int n;  
+        scanf("%d", &n);  
+  
+        int i;  
+        for (i = 0; i < n; i++)  
+        {  
+            scanf("%d%d", &acts[i].s, &acts[i].e);  
+        }  
+  
+        printf("%d\n", ArrangingActivities(n));  
+    }  
+    return 0;  
+}  
+
